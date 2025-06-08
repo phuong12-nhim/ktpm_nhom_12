@@ -1,5 +1,5 @@
 # ktpm
-Websibe bán sách | Nhóm 12
+Websibe bán sách 
 - Mô tả: Hệ thống website bán sách trực tuyến được thiết kế nhằm cung cấp một nền tảng thương mại điện tử cho phép người dùng thực hiện các hoạt động tìm kiếm, xem thông tin chi tiết, lựa chọn và đặt mua sách một cách dễ dàng. Đồng thời, hệ thống cũng hỗ trợ người quản trị trong việc quản lý danh mục sách, đơn hàng, thông tin khách hàng và các hoạt động vận hành liên quan.
 - Các chức năng cơ bản:
 Khách hàng:
@@ -15,6 +15,5 @@ Khách hàng:
 Admin:
   - Đăng nhập hệ thống quản trị: admin đăng nhập bằng tài khoản và mật khẩu với quyền hạn quản trị.
   - Quản lý sản phẩm sách: thêm mới, sửa đổi, xóa các cuốn sách trong hệ thống, quản lý thông tin chi tiết sách như tên, tác giả, giá, số lượng tồn kho.
-
 
 
