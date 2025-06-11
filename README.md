@@ -10,7 +10,6 @@ Khách hàng:
   - Thêm sách vào giỏ hàng: người dùng có thể thêm sách vào giỏ hàng, thay đổi số lượng hoặc xóa sản phẩm trong giỏ.
   - Xem và quản lý giỏ hàng:  người dùng xem tổng số sách, tổng tiền và có thể chỉnh sửa giỏ hàng trước khi đặt hàng.
   - Đặt hàng và thanh toán: người dùng điền thông tin nhận hàng, chọn phương thức thanh toán và hoàn tất đơn hàng.
-  - Xem lịch sử đơn hàng: người dùng theo dõi trạng thái và chi tiết các đơn hàng đã đặt.
   - Cập nhật thông tin cá nhân: người dùng có thể thay đổi thông tin cá nhân như mật khẩu, địa chỉ, số điện thoại.
 Admin:
   - Đăng nhập hệ thống quản trị: admin đăng nhập bằng tài khoản và mật khẩu với quyền hạn quản trị.
