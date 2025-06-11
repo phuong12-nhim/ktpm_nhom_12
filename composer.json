@@ -1,0 +1,19 @@
+{
+    "name": "unicode/autoload",
+    "description": "Học autoload bằng Composer",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Unicode\\Autoload\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Vu Chau",
+            "email": "contact@unicode.com"
+        }
+    ],
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.19"
+    }
+}
