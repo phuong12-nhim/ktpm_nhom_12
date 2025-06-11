@@ -14,5 +14,6 @@ Websibe bán sách
 - Admin:
   - Đăng nhập hệ thống quản trị: admin đăng nhập bằng tài khoản và mật khẩu với quyền hạn quản trị.
   - Quản lý sản phẩm sách: thêm mới, sửa đổi, xóa các cuốn sách trong hệ thống, quản lý thông tin chi tiết sách như tên, tác giả, giá, số lượng tồn kho.
-
+  - Quản lý đơn hàng: xem danh sách đơn hàng của khách hàng, cập nhật trạng thái đơn hàng.
+  - Quản lý danh mục sách: tạo, sửa, xóa các danh mục để phân loại sách dễ dàng.
 
