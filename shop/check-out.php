@@ -66,13 +66,16 @@
         $fileContent .= "Ghi chú đơn hàng: " . $note . "\n";
         $fileContent .= "-----------------------------------------------------------------------------\n";
 
+        $fileContent .= sprintf("%-30s %-20s %-15s %-15s\n", "Tên Sản Phẩm\t\t", "Số Lượng", "Đơn Giá", "Thành Tiền");
         foreach ($cart as $item) {
-        $fileContent .= "Tên Sản Phẩm\t\t\t\tSố Lượng\tĐơn Giá\t\tThành Tiền\n";
-        $fileContent .= $item['name'] . "\t\t" 
-                    . $item['quantity'] . "\t\t" 
-                    . number_format($item['price']) . " VNĐ\t" 
-                    . number_format($item['price'] * $item['quantity']) . " VNĐ\n";
-    }   
+            $fileContent .= sprintf(
+                "%-35s %-10d %-15s %-15s\n",
+                $item['name'],
+                $item['quantity'],
+                number_format($item['price']) . " VNĐ",
+                number_format($item['price'] * $item['quantity']) . " VNĐ"
+            );
+        }
 
         $maxLength = max(array_map('mb_strlen', array_column($cart, 'name')));
 
