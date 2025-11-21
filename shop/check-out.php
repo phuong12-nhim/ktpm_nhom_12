@@ -52,7 +52,7 @@
         // File content generation
         $filename = 'order_details_' . time() . '.txt';
         
-        $fileContent = " \n\t\t\tGÓC SÁCH NHỎ\n";
+        $fileContent = " \n\t\t\t\t\tGÓC SÁCH NHỎ\n";
         $fileContent .= "Địa chỉ: Phố Phan Đình Giót - Phương Liệt - Thanh Xuân - TP.Hà Nội\n";
         $fileContent .= "\nThông Tin Đơn Hàng:\n";
         $fileContent .= "-----------------------------------------------------------------------------\n";
@@ -66,13 +66,16 @@
         $fileContent .= "Ghi chú đơn hàng: " . $note . "\n";
         $fileContent .= "-----------------------------------------------------------------------------\n";
 
+        $fileContent .= sprintf("%-30s %-25s %-15s %-15s\n", "Tên Sản Phẩm\t\t", "Số Lượng", "Đơn Giá", "Thành Tiền");
         foreach ($cart as $item) {
-        $fileContent .= "Tên Sản Phẩm\t\t\t\tSố Lượng\tĐơn Giá\t\tThành Tiền\n";
-        $fileContent .= $item['name'] . "\t\t" 
-                    . $item['quantity'] . "\t\t" 
-                    . number_format($item['price']) . " VNĐ\t" 
-                    . number_format($item['price'] * $item['quantity']) . " VNĐ\n";
-    }   
+            $fileContent .= sprintf(
+                "%-35s %-10d %-15s %-15s\n",
+                $item['name'],
+                $item['quantity'],
+                number_format($item['price']) . " VNĐ",
+                number_format($item['price'] * $item['quantity']) . " VNĐ"
+            );
+        }   
 
         $maxLength = max(array_map('mb_strlen', array_column($cart, 'name')));
 
@@ -91,24 +94,24 @@
         $fileContent .= "Cảm ơn quý khách đã tin tưởng mua sản phẩm của Góc Sách Nhỏ!\n";
 
         // Tạo thư mục lưu đơn hàng nếu chưa có
-$ordersDir = 'orders/';
-if (!is_dir($ordersDir)) {
-    mkdir($ordersDir, 0755, true);
-}
-
-// Lưu file vào thư mục an toàn để tải lại
-$filename = $ordersDir . 'order_details_' . time() . '.txt';
-file_put_contents($filename, $fileContent);
-
-// Sau khi insert đơn hàng thành công
-$_SESSION['checkout_success'] = true;
-$_SESSION['checkout_filename'] = $filename; // file.txt vừa tạo
-unset($_SESSION['cart']);
-
-// Redirect để tránh gửi file trực tiếp
-header("Location: check-out.php");
-exit;
+    $ordersDir = 'orders/';
+    if (!is_dir($ordersDir)) {
+        mkdir($ordersDir, 0755, true);
     }
+
+    // Lưu file vào thư mục an toàn để tải lại
+    $filename = $ordersDir . 'order_details_' . time() . '.txt';
+    file_put_contents($filename, $fileContent);
+
+    // Sau khi insert đơn hàng thành công
+    $_SESSION['checkout_success'] = true;
+    $_SESSION['checkout_filename'] = $filename; // file.txt vừa tạo
+    unset($_SESSION['cart']);
+
+    // Redirect để tránh gửi file trực tiếp
+    header("Location: check-out.php");
+    exit;
+        }
     ?>
 
     <!DOCTYPE html>
