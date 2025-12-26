@@ -117,7 +117,7 @@ $result = mysqli_query($conn, $sql);
                         <div class="fe" style="width: 220px; height: 290px; text-align: center; padding: 5px; margin-left: 10px; margin-top: 15px; box-sizing: border-box;">
                             <div>
                                 <a href="hienthi.php?prdid=<?php echo $row["idsanpham"] ?>">
-                                    <img style="width: auto; height: 160px; " src="uploads/<?php echo $row["imgae"] ?>" alt="<?php echo $row["tensanpham"] ?>">
+                                    <img style="width: auto; height: 160px; " src="uploads/<?php echo $row["image"] ?>" alt="<?php echo $row["tensanpham"] ?>">
                                 </a>
                             </div>
                             <br>

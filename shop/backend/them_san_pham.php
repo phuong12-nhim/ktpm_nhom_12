@@ -25,7 +25,7 @@ if (isset($_POST['tensanpham'])) {
     }
     // nếu không có lỗi thì tiến hành thêm mới vào bảng
     if (!$error) {
-        $sql = "INSERT INTO `sanpham`(`catelogid`, `tensanpham`, `imgae`, `noidung`, `noidungchitiet`, `giadauvao`, `giadaura`) 
+        $sql = "INSERT INTO `sanpham`(`catelogid`, `tensanpham`, `image`, `noidung`, `noidungchitiet`, `giadauvao`, `giadaura`) 
         VALUES ('$idnhanhang','$tensp','$image','$desc','$detail','$pricein','$priceout')";
         if (mysqli_query($conn, $sql)) {
 
@@ -58,7 +58,7 @@ if (isset($_POST['tensanpham'])) {
             </div>
             <div class="form-group">
                 <label for="">Ảnh Mẫu</label>
-                <input type="file" class="form-control" name="imgae">
+                <input type="file" class="form-control" name="image">
             </div>
             <div class="form-group">
                 <label for="">Mô tả</label>

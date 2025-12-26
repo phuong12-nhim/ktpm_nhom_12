@@ -2,7 +2,7 @@
 include 'header.php';
 require_once 'connect.php';
 
-$sql = "SELECT s.idsanpham, c.catelogname as 'tenNhanHang', s.tensanpham, s.imgae, s.noidung, s.noidungchitiet,
+$sql = "SELECT s.idsanpham, c.catelogname as 'tenNhanHang', s.tensanpham, s.image, s.noidung, s.noidungchitiet,
         s.giadauvao, s.giadaura, s.status FROM sanpham s JOIN catelog c ON s.catelogid = c.catelogid";
 $sanpham = mysqli_query($conn, $sql);
 ?>
@@ -94,7 +94,7 @@ $sanpham = mysqli_query($conn, $sql);
                         <td><?php echo $row['idsanpham']; ?></td>
                         <td><?php echo $brand_name; ?></td>
                         <td><?php echo $row['tensanpham']; ?></td>
-                        <td><?php echo "<img width=\"100px\" height = \"auto\" src=\"/shop/uploads/" . $row["imgae"] . "\" alt=\"" . $row["tensanpham"] . "\">" ?></td>
+                        <td><?php echo "<img width=\"100px\" height = \"auto\" src=\"/shop/uploads/" . $row["image"] . "\" alt=\"" . $row["tensanpham"] . "\">" ?></td>
                         <td><?php echo $row['noidung']; ?></td>
                         <td><?php echo $row['giadauvao']; ?></td>
                         <td><?php echo $row['giadaura']; ?></td>

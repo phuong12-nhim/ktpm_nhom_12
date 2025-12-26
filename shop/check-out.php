@@ -66,11 +66,7 @@
         $fileContent .= "Ghi chú đơn hàng: " . $note . "\n";
         $fileContent .= "-----------------------------------------------------------------------------\n";
 
-<<<<<<< HEAD
         $fileContent .= sprintf("%-30s %-25s %-15s %-15s\n", "Tên Sản Phẩm\t\t", "Số Lượng", "Đơn Giá", "Thành Tiền");
-=======
-        $fileContent .= sprintf("%-30s %-20s %-15s %-15s\n", "Tên Sản Phẩm\t\t", "Số Lượng", "Đơn Giá", "Thành Tiền");
->>>>>>> 9c95f798182d9f8b32feaee60e171acacecb1dc7
         foreach ($cart as $item) {
             $fileContent .= sprintf(
                 "%-35s %-10d %-15s %-15s\n",
@@ -79,11 +75,7 @@
                 number_format($item['price']) . " VNĐ",
                 number_format($item['price'] * $item['quantity']) . " VNĐ"
             );
-<<<<<<< HEAD
         }   
-=======
-        }
->>>>>>> 9c95f798182d9f8b32feaee60e171acacecb1dc7
 
         $maxLength = max(array_map('mb_strlen', array_column($cart, 'name')));
 
@@ -251,7 +243,7 @@
                         unset($_SESSION['checkout_success']);
                         unset($_SESSION['checkout_filename']);
                     }
-?>
+                    ?>
 
                     <?php } ?>
                     

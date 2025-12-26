@@ -4,7 +4,7 @@ require_once 'connect.php';
 require_once 'uploadfiles.php';
 
 $id = !empty($_GET['Proid']) ? (int)$_GET['Proid'] : 0;
-$result = mysqli_query($conn, "SELECT s.idsanpham, c.catelogname as 'tenNhanHang', s.tensanpham, s.imgae, s.noidung, s.noidungchitiet,
+$result = mysqli_query($conn, "SELECT s.idsanpham, c.catelogname as 'tenNhanHang', s.tensanpham, s.image, s.noidung, s.noidungchitiet,
                     s.giadauvao, s.giadaura, s.status FROM sanpham s JOIN catelog c ON s.catelogid = c.catelogid AND s.idsanpham = $id");
 $rowSP = mysqli_fetch_assoc($result);
 
@@ -61,7 +61,7 @@ if (isset($_POST['tensanpham'])) {
             </div>
             <div class="form-group">
                 <label for="">Ảnh Mẫu</label>
-                <input type="file" class="form-control" name="imgae" value="<?php echo $rowSP['imgae']; ?>">
+                <input type="file" class="form-control" name="imgae" value="<?php echo $rowSP['image']; ?>">
                 <?php
                 if (!empty(isset($rowSP['imgae']))) {
                 ?>
