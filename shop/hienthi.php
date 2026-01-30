@@ -62,7 +62,7 @@
                 foreach ($result as $row) {
                     $tensanpham = $row["tensanpham"];
                     $noidung = $row["noidung"];
-                    $imgae = $row['imgae'];
+                    $imgae = $row['image'];
                     $giadauvao = $row['giadauvao'];
                     $giadaura = $row['giadaura'];
                     $sta = $row['status'];

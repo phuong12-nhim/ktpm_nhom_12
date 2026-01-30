@@ -24,9 +24,9 @@ if (isset($_POST['dangky']) &&
     $dk_sql = mysqli_query($conn,$sql);
 
     if ($dk_sql) {
-    $_SESSION['register_success'] = true; // đánh dấu đã đăng ký thành công
-    header("Location: login.php");        // chuyển hướng về trang đăng nhập
-    exit;
+        $_SESSION['register_success'] = true; // đánh dấu đã đăng ký thành công
+        header("Location: login.php");        // chuyển hướng về trang đăng nhập
+        exit;
     } else {
     echo "đăng ký tài khoản thất bại";
 }

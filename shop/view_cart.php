@@ -2,6 +2,10 @@
 require_once 'dieuhuong.php';
 
 $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
+if(!isset($_SESSION['login']['username'])){
+    header('Location: login.php');
+    exit;
+}
 ?>
 
 <!DOCTYPE html>

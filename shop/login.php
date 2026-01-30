@@ -29,7 +29,7 @@ if (isset($_POST['dangnhap'])) {
             echo "thông tin tài khoản hoặc mật khẩu không chính xác";
         }
         $_SESSION['login']['username'] = $use;
-        $_SESSION['login'];
+        $_SESSION['login'] = true;
     } else {
         echo "Mật khẩu phải chứa ít nhất 4 ký tự số và không chứa ký tự đặc biệt.";
     }
