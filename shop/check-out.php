@@ -34,15 +34,15 @@
         $tong_tien += $soluong * $dongia;
     }
 
+    $soluong = isset($item['quantity']) && is_numeric($item['quantity']) ? (int)$item['quantity'] : 0;
     // Insert hóa đơn (1 lần duy nhất)
-    $stmt = $conn->prepare("INSERT INTO hoadon (idkhachhang, name, address, phone, email, Tong_tien, Ngay_tao) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("issssds", $idkhachhang, $username, $address, $phone, $email, $tong_tien, $Ngay_tao);
+    $stmt = $conn->prepare("INSERT INTO hoadon (idkhachhang, name, address, phone, email, Tong_tien, Ngay_tao, soluong) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("issssdsi", $idkhachhang, $username, $address, $phone, $email, $tong_tien, $Ngay_tao, $soluong);
     $stmt->execute();
     $mahd = $conn->insert_id;
 
     // Insert chi tiết đơn hàng
     foreach ($cart as $idsanpham => $item) {
-        $soluong = isset($item['quantity']) && is_numeric($item['quantity']) ? (int)$item['quantity'] : 0;
         $dongia = isset($item['price']) && is_numeric($item['price']) ? (float)$item['price'] : 0;
 
         $stmt = $conn->prepare("INSERT INTO chitietdonhang (idhoadon, idsanpham, dongia, soluong) VALUES (?, ?, ?, ?)");

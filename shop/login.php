@@ -1,38 +1,32 @@
 <?php
+include_once 'ketnoi.php';
 session_start();
+ob_start();
 if (isset($_SESSION['register_success']) && $_SESSION['register_success']) {
     echo "<script>alert('Đăng ký thành công!');</script>";
     unset($_SESSION['register_success']); // Xóa thông báo sau khi hiển thị
 }
-ob_start();
-include_once 'ketnoi.php';
-
 if (isset($_POST['dangnhap'])) {
     $use = $_POST['username'];
     $pass = $_POST['password'];
-    
+    $_SESSION['login'] = [
+        'username' => $use
+    ];
     // Check if the password contains at least 4 numeric characters and no special characters
     if (preg_match('/^[0-9]{4,}$/', $pass) && !preg_match('/[^A-Za-z0-9]/', $pass)) {
         $pass = md5($pass);
-// echo $use, $pass;
+    // echo $use, $pass;
     $sql = "SELECT * FROM `khachang` WHERE username = '$use' AND matKhau = '$pass'";
     $use_sql = mysqli_query($conn, $sql);
-        if (mysqli_num_rows($use_sql) > 0) {
-            echo "đăng nhập thành công";
-            if (isset($_GET['action'])) {
-                $action = $_GET['action'];
-                header('location: ' . $action . '.php');
-            } else {
-                header('location: sanpham.php');
-            }
-        } else {
+    if (mysqli_num_rows($use_sql) > 0) {
+        $_SESSION['login']['username'] = $use; // ✅ SET SESSION TRƯỚC
+        header('Location: sanpham.php');
+        exit(); // ✅ BẮT BUỘC
+    } else {
             echo "thông tin tài khoản hoặc mật khẩu không chính xác";
         }
         $_SESSION['login']['username'] = $use;
-        $_SESSION['login'] = true;
-    } else {
-        echo "Mật khẩu phải chứa ít nhất 4 ký tự số và không chứa ký tự đặc biệt.";
-    }
+    } 
 }
 ?>
 
