@@ -64,37 +64,37 @@ $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
             font-weight: bold;
         }
         .contact-links {
-    display: flex;
-}
+            display: flex;
+        }
 
-.contact-links {
-    display: flex;
-    justify-content: space-between; /* Horizontal adjustment */
-    align-items: center; /* Vertical adjustment */
-    margin-top: 10px; /* Adjust top margin as needed */
-    margin-bottom: 10px; /* Adjust bottom margin as needed  */
-} 
+        .contact-links {
+            display: flex;
+            justify-content: space-between; /* Horizontal adjustment */
+            align-items: center; /* Vertical adjustment */
+            margin-top: 10px; /* Adjust top margin as needed */
+            margin-bottom: 10px; /* Adjust bottom margin as needed  */
+        } 
 
-.contact-links a {
-    text-decoration: none;
-    color: light blue; /* Adjust color as needed */
-}
+        .contact-links a {
+            text-decoration: none;
+            color: light blue; /* Adjust color as needed */
+        }
 
-.contact-links a i {
-    margin-right: 10px; /* Adjust right margin of the icon */
-    margin-left: 10px; /* Adjust left margin of the icon */
-}
-.contact-links a:last-child {
-    margin-left: auto; /* Push the Zalo link to the right */
-}
-.star {
-      position: absolute;
-      top: -20px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 16px;
-      color: gold;
-    }
+        .contact-links a i {
+            margin-right: 10px; /* Adjust right margin of the icon */
+            margin-left: 10px; /* Adjust left margin of the icon */
+        }
+        .contact-links a:last-child {
+            margin-left: auto; /* Push the Zalo link to the right */
+        }
+        .star {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+            color: gold;
+            }
 
     </style>
 
@@ -116,7 +116,7 @@ $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
             <div style="margin-right: 70px;">
                 <!-- tìm kiếm -->
                 <form class="search" action="/shop/sanpham.php" method="get">
-                    <input type="text" name="search" placeholder="Tìm kiếm sản phẩm" id="search" >
+                    <input type="text" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>"  name="search" placeholder="Tìm kiếm sản phẩm" id="search" >
                     <input type="submit" value="Tìm kiếm">
                 </form>
                 <!-- giỏ hàng -->
@@ -160,8 +160,8 @@ $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
                 <div class="loc">
                     <!-- lọc -->
                     <form action="/shop/sanpham.php" method="get">
-                        <input type="text" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>" name="txtPriceMin" id="txtPriceMin" placeholder="  Giá thấp nhất">
-                        <input type="text" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>" name="txtPriceMax" id="txtPriceMax" placeholder="  Giá cao nhất">
+                        <input type="text" name="txtPriceMin" id="txtPriceMin" placeholder="  Giá thấp nhất">
+                        <input type="text" name="txtPriceMax" id="txtPriceMax" placeholder="  Giá cao nhất">
                         <input type="submit" style="width: 50px;" value="Lọc">
                     </form>
                 </div>

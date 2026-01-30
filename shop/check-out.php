@@ -224,7 +224,7 @@
 
                             <div class="form-group">
                                     <label for="note"> <h3>GHI CHÚ</h3></label>
-                                    <textarea name="note" id="note" cols="30" rows="10" placeholder="CHi TIẾT ĐƠN HÀNG" class="form-control"></textarea>
+                                    <textarea name="note" id="note" cols="30" rows="10" placeholder="CHI TIẾT ĐƠN HÀNG" class="form-control"></textarea>
                             </div>
                             
                             <button type="submit" name="checkout" class="btn btn-info" >Thanh Toán </button>
