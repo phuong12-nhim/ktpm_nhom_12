@@ -12,7 +12,6 @@ if ($quantity < 0) {
     $action = 'delete';
 }
 
-// Use prepared statement to prevent SQL injection
 $query = mysqli_prepare($conn, "SELECT * FROM `sanpham` WHERE `idsanpham`= ?");
 mysqli_stmt_bind_param($query, "i", $idsp);
 mysqli_stmt_execute($query);
