@@ -20,6 +20,7 @@ if (!isset($_SESSION['admin']['username'])) {
         <div class="container">
             <ul class="nav navbar-nav">
                 <li><a href="/shop/backend/">Trang chủ</a></li>
+                <li><a href="/shop/backend/profile.php/">🙂</a></li>
                 <li><a href="/shop/backend/nhan_hang.php/">Nhãn hàng</a></li>
                 <li><a href="/shop/backend/san_pham.php/">Sản phẩm sách</a></li>
                 <li><a href="/shop/backend/order.php">Quản lý đơn hàng</a></li>
