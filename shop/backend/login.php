@@ -1,12 +1,14 @@
 <?php
 session_start();
+ob_start();
+include_once 'connect.php';
+
+$error = ""; //Biến lỗi 
+
 if (isset($_SESSION['register_success']) && $_SESSION['register_success']) {
     echo "<script>alert('Đăng ký tài khoản thành công!');</script>";
     unset($_SESSION['register_success']);
 }
-
-ob_start();
-include_once 'connect.php';
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
     $use = $_POST['username'];
@@ -14,29 +16,26 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
     // Check if the password is empty
     if (empty($pass)) {
-        echo "Mật khẩu không được để trống.";
-        exit;
+        $error = "Mật khẩu không được để trống.";
     }
 
     // Check if the password contains at least 4 numeric characters and no special characters
-    if (!preg_match('/^[0-9]{4,}$/', $pass) || preg_match('/[^A-Za-z0-9]/', $pass)) {
-        echo "Mật khẩu phải chứa ít nhất 4 ký tự số và không chứa ký tự đặc biệt.";
-        exit;
-    }
-
-    $pass = md5($pass);
-
-    $sql = "SELECT * FROM `admin` WHERE username = '$use' AND `password` = '$pass'";
-    $use_sql = mysqli_query($conn, $sql);
-
-    if (mysqli_num_rows($use_sql) > 0) {
-        echo "đăng nhập thành công";
-        header('location: index.php');
+    elseif (!preg_match('/^[0-9]{4,}$/', $pass) || preg_match('/[^A-Za-z0-9]/', $pass)) {
+        $error = "Mật khẩu phải chứa ít nhất 4 ký tự số và không chứa ký tự đặc biệt.";
     } else {
-        echo "thông tin tài khoản hoặc mật khẩu không chính xác";
-    }
+        $pass = md5($pass);
 
-    $_SESSION['admin']['username'] = $use;
+        $sql = "SELECT * FROM `admin` WHERE username = '$use' AND `password` = '$pass'";
+        $use_sql = mysqli_query($conn, $sql);
+
+        if (mysqli_num_rows($use_sql) > 0) {
+            $_SESSION['admin']['username'] = $use;
+            header('location: index.php');
+            exit;
+        } else {
+            $error = "Thông tin tài khoản hoặc mật khẩu không chính xác";
+        }
+    }
 }
 ?>
 
@@ -116,23 +115,34 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
                 <legend class="text-center">Đăng Nhập</legend>
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" name="username" id="username" placeholder="Nhập tài khoản" class="form-control" required>
+                    <input type="text" name="username" id="username" placeholder="Nhập tài khoản" class="form-control"
+                        required>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <div class="input-group">
-                        <input type="password" name="password" id="password" placeholder="Nhập mật khẩu" class="form-control" required>
+                        <input type="password" name="password" id="password" placeholder="Nhập mật khẩu"
+                            class="form-control <?php echo !empty($error) ? 'is-invalid' : ''; ?>" required>
+
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="button" id="show-password-toggle">
                                 <i class="fas fa-eye"></i>
                             </button>
                         </div>
                     </div>
+
+                    <!-- THÔNG BÁO LỖI -->
+                    <?php if (!empty($error)) { ?>
+                        <small class="text-danger mt-1 d-block">
+                            <?php echo $error; ?>
+                        </small>
+                    <?php } ?>
                 </div>
                 <button type="submit" name="dangnhap" class="btn btn-primary btn-block">Đăng Nhập</button>
 
                 <div class="form-group text-center">
-                    Bạn chưa có tài khoản? <a href="register.php" style="margin: 10px 10px 10px 20px" class="btn btn-primary">Đăng Ký</a>
+                    Bạn chưa có tài khoản? <a href="register.php" style="margin: 10px 10px 10px 20px"
+                        class="btn btn-primary">Đăng Ký</a>
                 </div>
             </form>
         </div>
@@ -150,10 +160,12 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
             passwordToggleBtn.addEventListener('click', function() {
                 if (passwordInput.type === 'password') {
                     passwordInput.type = 'text';
-                    passwordToggleBtn.innerHTML = '<i class="fas fa-eye-slash"></i>'; // Change the icon to an eye slash when password is visible
+                    passwordToggleBtn.innerHTML =
+                        '<i class="fas fa-eye-slash"></i>'; // Change the icon to an eye slash when password is visible
                 } else {
                     passwordInput.type = 'password';
-                    passwordToggleBtn.innerHTML = '<i class="fas fa-eye"></i>'; // Change the icon back to an eye when password is hidden
+                    passwordToggleBtn.innerHTML =
+                        '<i class="fas fa-eye"></i>'; // Change the icon back to an eye when password is hidden
                 }
             });
         });
