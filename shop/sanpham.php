@@ -1,5 +1,11 @@
 <?php
 require_once 'dieuhuong.php';
+if(isset($_SESSION['login_success'])){
+    echo "<script>alert('Đăng nhập thành công');</script>";
+    unset($_SESSION['login_success']);
+    header('Location: sanpham.php');
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -158,7 +164,7 @@ $result = mysqli_query($conn, $sql);
                     </div>
                 <?php
                 } else {
-                    echo "<p>Không có sản phẩm nào.</p>";
+                    echo "<script>alert('Không có sản phẩm nào.');</script>";
                 }
                 ?>
             </div>

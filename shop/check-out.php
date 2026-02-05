@@ -189,9 +189,6 @@ if (isset($_SESSION['login']['username']) && isset($_POST['update'])) {
                 <div class="flex-1">
                     <?php if ($res) { ?>
                         <form action="" method="post">
-
-                            <!-- ... (your existing form fields) -->
-
                             <div class="form-group">
                                     <label for="note"> <h3>GHI CHÚ</h3></label>
                                     <textarea name="note" id="note" cols="30" rows="10" placeholder="CHI TIẾT ĐƠN HÀNG" class="form-control"></textarea>

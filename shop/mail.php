@@ -21,7 +21,7 @@ if (!$toEmail || !file_exists($filePath)) {
 $mail = new PHPMailer(true);
 
 try {
-    // SMTP config (ví dụ Gmail)
+    // SMTP config
     $mail->isSMTP();
     $mail->Host       = 'smtp.gmail.com';
     $mail->SMTPAuth   = true;

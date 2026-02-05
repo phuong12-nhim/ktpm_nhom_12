@@ -57,7 +57,7 @@ if(!isset($_SESSION['login']['username'])){
                 </tr>
             </tbody>
         </table>
-        <a href="check-out.php" class="btn btn-info">Thanh toán</a>
+        <a href="check-out.php" class="btn btn-info">Tiếp tục</a>
     </div>
 </body>
 

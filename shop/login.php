@@ -20,10 +20,12 @@ if (isset($_POST['dangnhap'])) {
     $use_sql = mysqli_query($conn, $sql);
     if (mysqli_num_rows($use_sql) > 0) {
         $_SESSION['login']['username'] = $use; // ✅ SET SESSION TRƯỚC
+        $_SESSION['login_success'] = true;
+        echo "<script>alert('Đăng nhập thành công');</script>";
         header('Location: sanpham.php');
         exit(); // ✅ BẮT BUỘC
     } else {
-            echo "thông tin tài khoản hoặc mật khẩu không chính xác";
+            echo "<script>alert('Thông tin tài khoản hoặc mật khẩu không chính xác');</script>";
         }
         $_SESSION['login']['username'] = $use;
     } 

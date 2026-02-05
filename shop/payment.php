@@ -92,8 +92,6 @@
         $fileContent .= "Tổng Tiền:" . number_format(total_price($cart)) . " VNĐ\n";
         $fileContent .= "Cảm ơn quý khách đã tin tưởng mua sản phẩm của Góc Sách Nhỏ!\n";
 
-        // Tạo thư mục lưu đơn hàng nếu chưa có
-
         // Lưu file vào thư mục an toàn để tải lại
         file_put_contents($filename, $fileContent);
 
@@ -121,8 +119,6 @@
         margin: 0;
         background: #f2f4f8;
     }
-
-    /* KHUNG THANH TOÁN */
     .payment-container {
         max-width: 420px;
         margin: 70px auto;
@@ -138,14 +134,12 @@
         color: #2c3e50;
     }
 
-    /* THÔNG TIN */
     .payment-container p {
         margin: 6px 0;
         font-size: 15px;
         color: #333;
     }
 
-    /* FORM */
     .payment-form {
         margin-top: 20px;
     }
@@ -172,7 +166,6 @@
         transform: scale(1.2);
     }
 
-    /* NÚT THANH TOÁN */
     .payment-form button {
         width: 100%;
         margin-top: 10px;
@@ -190,7 +183,6 @@
         background: #217dbb;
     }
 
-    /* LINK TẢI HÓA ĐƠN */
     .btn {
         display: inline-block;
         margin-top: 15px;
@@ -240,8 +232,6 @@
             </a>
         </div>
     <?php endif; ?>
-
-
     </div>
     </body>
     </html>
