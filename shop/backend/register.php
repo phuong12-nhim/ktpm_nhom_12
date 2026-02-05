@@ -14,12 +14,10 @@ if (
     isset($_POST['dangky']) &&
     !empty($_POST['username']) &&
     !empty($_POST['password']) &&
-    !empty($_POST['repassword']) &&
     isset($_POST['level'])
 ) {
     $name = trim($_POST['username']);
     $pas = htmlspecialchars($_POST['password']);
-    $repass = htmlspecialchars($_POST['repassword']);
     $lev = htmlspecialchars($_POST['level']);
 
     $checkUser = "SELECT id FROM admin WHERE username = '$name' LIMIT 1";
@@ -34,22 +32,17 @@ if (
         $errors['password'] = "Mật khẩu phải có ít nhất 4 ký tự.";
     }
 
-    // 3️⃣ Check khớp mật khẩu
-    if ($pas !== $repass) {
-        $errors['repassword'] = "Mật khẩu nhập lại không khớp.";
-    }
 
     // 4️⃣ Nếu KHÔNG có lỗi → insert DB
     if (
         empty($errors['username']) &&
-        empty($errors['password']) &&
-        empty($errors['repassword'])
+        empty($errors['password']) 
     ) {
         $pas = md5($pas);
         $repass = md5($repass);
 
-        $sql = "INSERT INTO admin(username, password, repassword, level)
-                VALUES ('$name', '$pas', '$repass', '$lev')";
+        $sql = "INSERT INTO admin(username, password, level)
+                VALUES ('$name', '$pas', '$lev')";
 
         if (mysqli_query($conn, $sql)) {
             $_SESSION['register_success'] = true;
@@ -174,15 +167,7 @@ if (
                         <small class="text-danger"><?php echo $errors['password']; ?></small>
                     <?php } ?>
                 </div>
-                <div class="form-group">
-                    <label for="">Nhập lại mật khẩu</label>
-                    <input type="password" name="repassword"
-                        class="form-control <?php echo !empty($errors['repassword']) ? 'is-invalid' : ''; ?>" required>
-
-                    <?php if (!empty($errors['repassword'])) { ?>
-                        <small class="text-danger"><?php echo $errors['repassword']; ?></small>
-                    <?php } ?>
-                </div>
+            
                 <div class="form-group">
                     <label for="">Level</label>
                     <input type="number" name="level" class="form-control" required>
