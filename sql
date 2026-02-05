@@ -355,6 +355,7 @@ CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(100),
     email VARCHAR(100),
+    phone VARCHAR(15) NOT NULL,
     role TINYINT DEFAULT 0
 );
 
