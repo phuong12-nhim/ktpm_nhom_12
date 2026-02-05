@@ -6,6 +6,7 @@ if(!isset($_SESSION['login']['username'])){
     header('Location: login.php');
     exit;
 }
+$cart_empty = empty($cart);
 ?>
 
 <!DOCTYPE html>
@@ -57,7 +58,11 @@ if(!isset($_SESSION['login']['username'])){
                 </tr>
             </tbody>
         </table>
-        <a href="check-out.php" class="btn btn-info">Tiếp tục</a>
+        <?php if ($cart_empty): ?>
+            <button class="btn btn-secondary" onclick="alert('Không có sản phẩm nào trong giỏ hàng')" disabled> Tiếp tục </button>
+        <?php else: ?>
+            <a href="check-out.php" class="btn btn-info">Tiếp tục</a>
+        <?php endif; ?>
     </div>
 </body>
 
