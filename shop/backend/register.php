@@ -140,10 +140,6 @@ $_SESSION['secret'] = md5(uniqid(rand(), true));
                     <input type="number" name="level" class="form-control" required>
                 </div>
                 <!-- Secret input field -->
-                <div class="form-group">
-                    <label for="">Secret</label>
-                    <input type="text" name="secret" class="form-control" required>
-                </div>
                 <button type="submit" name="dangky" class="btn btn-primary">Đăng ký</button>
 
                 <div class="form-group mt-2">
