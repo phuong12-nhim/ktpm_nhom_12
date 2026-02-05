@@ -15,7 +15,8 @@ $users = mysqli_query($conn, "SELECT * FROM khachang");
         <thead>
             <tr>
                 <th>id</th>
-                <th>Tên</th>
+                <th>Tên khách hàng</th>
+                <th>Username</th>
                 <th>Email</th>
                 <th>SĐT</th>
                 <th>Vai trò</th>
@@ -27,6 +28,7 @@ $users = mysqli_query($conn, "SELECT * FROM khachang");
             <?php while ($row = mysqli_fetch_assoc($users)) : ?>
             <tr>
                 <td><?= $row['idkhachhang']; ?></td>
+                <td><?= $row['tenkhachhang']; ?></td>
                 <td><?= $row['username']; ?></td>
                 <td><?= $row['email']; ?></td>
                 <td><?= $row['phone']; ?></td>
