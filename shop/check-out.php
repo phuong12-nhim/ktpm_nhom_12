@@ -195,7 +195,7 @@ if (isset($_SESSION['login']['username']) && isset($_POST['update'])) {
                             </div>
                             
                             <button type="submit" name="checkout" class="btn btn-info" >Tiếp tục </button>
-
+                        </form>
                     <?php } ?>
                     
                     </div>
@@ -220,7 +220,6 @@ if (isset($_SESSION['login']['username']) && isset($_POST['update'])) {
                                     </tr>
                                 <?php } ?>
                             
-                            </form>
                             <?php if ($res) ?>
                                 <form method="POST">
                                     <div class="customer-box">

@@ -72,8 +72,7 @@ INSERT INTO `chitietdonhang` (`idhoadon`, `idsanpham`, `dongia`, `soluong`) VALU
 --
 
 CREATE TABLE `chitietsanpham` (
-  `idsanpham` int(11) DEFAULT NULL,
-  `sizeid` int(11) DEFAULT NULL,
+  `idsanpham` int(11) NOT NULL,
   `soluong` int(11) NOT NULL,
   `status` tinyint(4) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -200,6 +199,9 @@ INSERT INTO `sanpham` (`idsanpham`, `catelogid`, `id_author`, `tensanpham`, `ima
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
+ALTER TABLE chitietdonhang
+ADD PRIMARY KEY (idhoadon, idsanpham);
+
 --
 -- Chỉ mục cho bảng `catelog`
 --
@@ -284,7 +286,9 @@ ALTER TABLE `sanpham`
 -- Các ràng buộc cho bảng `chitietdonhang`
 --
 ALTER TABLE `chitietdonhang`
-  ADD CONSTRAINT `FK_ctdh` FOREIGN KEY (`idhoadon`) REFERENCES `hoadon` (`idhoadon`);
+  ADD CONSTRAINT `FK_ctdh` FOREIGN KEY (`idhoadon`) REFERENCES `hoadon` (`idhoadon`),
+  ADD CONSTRAINT `FK_idsp` FOREIGN KEY (`idsanpham`) REFERENCES `sanpham` (`idsanpham`);
+
 
 --
 -- Các ràng buộc cho bảng `chitietsanpham`
