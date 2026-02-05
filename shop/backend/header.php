@@ -1,9 +1,9 @@
 <?php
 session_start();
 ob_start();
-    if (!isset($_SESSION['admin']['username'])) {
-        header("Location: login.php");
-    }
+if (!isset($_SESSION['admin']['username'])) {
+    header("Location: login.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +23,8 @@ ob_start();
                 <li><a href="/shop/backend/nhan_hang.php/">Nhãn hàng</a></li>
                 <li><a href="/shop/backend/san_pham.php/">Sản phẩm sách</a></li>
                 <li><a href="/shop/backend/order.php">Quản lý đơn hàng</a></li>
-                
+                <li><a href="/shop/backend/users.php">Quản lý người dùng</a></li>
+
                 <br>
                 <?php
                 if (isset($_SESSION['admin']['username'])) {
@@ -36,4 +37,5 @@ ob_start();
             </ul>
         </div>
     </nav>
-    <div class="container"> <!-- Thẻ mở .container -->
+    <div class="container">
+        <!-- Thẻ mở .container -->

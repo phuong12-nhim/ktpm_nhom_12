@@ -351,3 +351,6 @@ ALTER TABLE `sanpham`
   ADD CONSTRAINT `FK_idcate` FOREIGN KEY (`catelogid`) REFERENCES `catelog` (`catelogid`);
 
 
+
+
+

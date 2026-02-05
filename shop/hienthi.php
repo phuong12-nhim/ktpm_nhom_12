@@ -88,9 +88,9 @@
                         echo "<h1 style=\"text-align: left; font-weight:bold; font-size: 18px\"> Mô tả sản phẩm :</h1>";
                         echo "<p style=\"text-align: left; font-size: 18px\">$noidung</p>";
                         echo "<input style=\"font-size: 20px;\" name=\"quantity\" type=\"number\" value=\"1\">";
-                        echo "<input type=\"hidden\" name=\"id\" value=\"".$row['idsanpham']."\">";
+                        echo "<input type=\"hidden\" name=\"id\" value=\"" . $row['idsanpham'] . "\">";
                         echo "
-                            <a href=\"cart.php?id=".$row['idsanpham']."\">
+                            <a href=\"cart.php?id=" . $row['idsanpham'] . "\">
                                 
                                 <button type=\"submit\" class=\"btn btn-outline-primary\">
                                     Thêm vào giỏ hàng
@@ -130,4 +130,4 @@
     </form>
  -->
 
- <!-- &action='add' -->
+<!-- &action='add' -->
