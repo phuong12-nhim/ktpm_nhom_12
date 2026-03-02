@@ -51,16 +51,17 @@
             <div class="item-right">
                 <?php
                 require_once 'ketnoi.php';
-                $sql = "SELECT * FROM `sanpham`";
+                $sql = "SELECT sanpham.*, tacgia.name AS tentacgia FROM sanpham LEFT JOIN tacgia ON sanpham.id_author = tacgia.id_author";
                 if (isset($_GET["prdid"])) {
                     $prdid = $_GET["prdid"];
-                    $sql .= " WHERE `idsanpham` = $prdid";
+                    $sql .= " WHERE sanpham.idsanpham = $prdid";
                 }
                 $result = mysqli_query($conn, $sql);
                 $tensanpham = $noidung = $imgae = "";
                 $giadauvao = $giadaura = 0;
                 foreach ($result as $row) {
                     $tensanpham = $row["tensanpham"];
+                    $tentacgia = $row["tentacgia"];
                     $noidung = $row["noidung"];
                     $imgae = $row['image'];
                     $giadauvao = $row['giadauvao'];
@@ -83,9 +84,9 @@
                                                     background: linear-gradient(to right, #1846d1 0%, #fafafa 100%);
                                                     background-clip: text;
                                                     color: black;\">$tensanpham</h1>";
-                        // echo "<h3>" . number_format($giadauvao) . "đ</h3>";
-                        echo "<p style=\"font-size: 40px; font-weight: bold; color: black; \">Giá: " . number_format($giadaura) . "đ </p>";
-                        echo "<h1 style=\"text-align: left; font-weight:bold; font-size: 18px\"> Mô tả sản phẩm :</h1>";
+                        echo "<p style=\"font-size: 30px; font-weight: bold; color: black; \">Giá: " . number_format($giadaura) . "đ </p>";
+                        echo "<h1 style=\"text-align: left; margin-bottom: 20px\"> <strong> Tác giả:</strong> $tentacgia</h1>";
+                        echo "<h1 style=\"text-align: left; font-weight:bold;\"> Mô tả sản phẩm :</h1>";
                         echo "<p style=\"text-align: left; font-size: 18px\">$noidung</p>";
                         echo "<input style=\"font-size: 20px;\" name=\"quantity\" type=\"number\" value=\"1\">";
                         echo "<input type=\"hidden\" name=\"id\" value=\"" . $row['idsanpham'] . "\">";

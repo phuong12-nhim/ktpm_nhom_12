@@ -9,6 +9,7 @@ $error = '';
 if (isset($_POST['tensanpham'])) {
     $idnhanhang = $_POST['catelogid'];
     $tensp = $_POST['tensanpham'];
+    $tentacgia = $_POST['tentacgia'];
     $desc = $_POST['noidung'];
     $detail = $_POST['noidungchitiet'];
     $pricein = $_POST['giadauvao'];
@@ -16,7 +17,7 @@ if (isset($_POST['tensanpham'])) {
     if (empty($tensp)) {
         $error = 'Tên nhãn hàng không được để trống';
     }
-    $isUploadOk = uploadFile($_FILES["imgae"], $tensp);
+    $isUploadOk = uploadFile($_FILES["image"], $tensp);
     if ($isUploadOk) {
         echo "Upload file thành công";
         $image = str_replace(" ", "_", $tensp) . "." . "jpg";
@@ -25,14 +26,28 @@ if (isset($_POST['tensanpham'])) {
     }
     // nếu không có lỗi thì tiến hành thêm mới vào bảng
     if (!$error) {
-        $sql = "INSERT INTO `sanpham`(`catelogid`, `tensanpham`, `image`, `noidung`, `noidungchitiet`, `giadauvao`, `giadaura`) 
-        VALUES ('$idnhanhang','$tensp','$image','$desc','$detail','$pricein','$priceout')";
-        if (mysqli_query($conn, $sql)) {
 
-            header('location: san_pham.php');
-        } else {
-            $error = 'Có lỗi, vui lòng thử lại';
-        }
+    // Kiểm tra tác giả đã tồn tại chưa
+    $checkAuthor = mysqli_query($conn, "SELECT * FROM tacgia WHERE name = '$tentacgia'");
+    
+    if (mysqli_num_rows($checkAuthor) > 0) {
+        $rowAuthor = mysqli_fetch_assoc($checkAuthor);
+        $authorid = $rowAuthor['id_author'];
+    } else {
+        mysqli_query($conn, "INSERT INTO tacgia(name) VALUES('$tentacgia')");
+        $authorid = mysqli_insert_id($conn);
+    }
+    $sql = "INSERT INTO sanpham
+    (catelogid, id_author, tensanpham, image, noidung, noidungchitiet, giadauvao, giadaura)
+    VALUES
+    ('$idnhanhang','$authorid','$tensp','$image','$desc','$detail','$pricein','$priceout')";
+
+    if (mysqli_query($conn, $sql)) {
+        header('location: san_pham.php');
+        exit();
+    } else {
+        $error = 'Có lỗi, vui lòng thử lại';
+    }
     }
 }
 ?>
@@ -55,6 +70,10 @@ if (isset($_POST['tensanpham'])) {
             <div class="form-group">
                 <label for="">Tên sản phẩm</label>
                 <input type="text" class="form-control" name="tensanpham" placeholder="Nhập tên nhãn hàng">
+            </div>
+            <div class="form-group">
+                <label>Tác giả</label>
+                <input type="text" class="form-control" name="tentacgia" placeholder="Nhập tên tác giả">
             </div>
             <div class="form-group">
                 <label for="">Ảnh Mẫu</label>
