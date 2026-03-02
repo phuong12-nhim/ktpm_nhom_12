@@ -12,6 +12,10 @@
     $checkout = $_SESSION['checkout'] ?? null;
 
     if(isset($_POST['payment'])){
+        if(empty($cart) || total_price($cart) == 0){
+            echo "<script>alert('Giỏ hàng hiện đang trống!'); window.location.href='sanpham.php';</script>";
+            exit;
+        }
         $username = $_SESSION['login']['username'];
 
         // Lấy thông tin khách hàng

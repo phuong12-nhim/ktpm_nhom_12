@@ -19,7 +19,7 @@ if (!$toEmail || !file_exists($filePath)) {
 }
 
 $mail = new PHPMailer(true);
-
+$mail->CharSet = 'UTF-8';   
 try {
     // SMTP config
     $mail->isSMTP();

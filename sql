@@ -78,7 +78,6 @@ CREATE TABLE `chitietsanpham` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `chitietsanpham`
 --
 
 INSERT INTO `chitietsanpham` (`idsanpham`, `soluong`, `status`) VALUES
@@ -107,15 +106,16 @@ CREATE TABLE `hoadon` (
   `Tong_tien` float DEFAULT NULL,
   `Ngay_tao` datetime DEFAULT NULL,
   `soluong` int(11) DEFAULT NULL, 
-  `status` tinyint(4) DEFAULT 1
+  `status` tinyint(4) DEFAULT 0,
+  `ngay_cap_nhat` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `hoadon`
 --
 
-INSERT INTO `hoadon` (`idhoadon`, `idkhachhang`, `name`, `address`, `phone`, `email`, `Tong_tien`, `Ngay_tao`, `soluong`, `status`) VALUES
-(1, 10, 'thanh', 'hà nội', 1234677, 'thanh@gmail.com', NULL, NULL, NULL, 2);
+INSERT INTO `hoadon` (`idhoadon`, `idkhachhang`, `name`, `address`, `phone`, `email`, `Tong_tien`, `Ngay_tao`, `soluong`, `status`, `ngay_cap_nhat`) VALUES
+(1, 10, 'thanh', 'hà nội', 1234677, 'thanh@gmail.com', NULL, NULL, NULL, 2, NULL);
 
 -- --------------------------------------------------------
 
