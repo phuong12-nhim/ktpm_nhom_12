@@ -28,7 +28,7 @@ if (isset($_POST['tensanpham'])) {
     }
     // nếu không có lỗi thì tiến hành thêm mới vào bảng
     if (!$error) {
-        $sql = "UPDATE sanpham SET catelogid ='$idnhanhang',`tensanpham`='$tensp',`imgae`='$image',`noidung`='$desc',`noidungchitiet`='$detail',
+        $sql = "UPDATE sanpham SET catelogid ='$idnhanhang',`tensanpham`='$tensp',`image`='$image',`noidung`='$desc',`noidungchitiet`='$detail',
                 `giadauvao`='$pricein',`giadaura`='$priceout' WHERE `idsanpham`= $id";
         if (mysqli_query($conn, $sql)) {
 

@@ -19,11 +19,11 @@ if (isset($_POST['dangnhap'])) {
     $sql = "SELECT * FROM `khachang` WHERE username = '$use' AND matKhau = '$pass'";
     $use_sql = mysqli_query($conn, $sql);
     if (mysqli_num_rows($use_sql) > 0) {
-        $_SESSION['login']['username'] = $use; // ✅ SET SESSION TRƯỚC
+        $_SESSION['login']['username'] = $use;
         $_SESSION['login_success'] = true;
         echo "<script>alert('Đăng nhập thành công');</script>";
         header('Location: sanpham.php');
-        exit(); // ✅ BẮT BUỘC
+        exit(); 
     } else {
             echo "<script>alert('Thông tin tài khoản hoặc mật khẩu không chính xác');</script>";
         }

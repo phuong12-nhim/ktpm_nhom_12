@@ -2,9 +2,7 @@
 require_once 'dieuhuong.php';
 if(isset($_SESSION['login_success'])){
     echo "<script>alert('Đăng nhập thành công');</script>";
-    unset($_SESSION['login_success']);
-    header('Location: sanpham.php');
-    exit;
+    unset($_SESSION['login_success']); 
 }
 ?>
 

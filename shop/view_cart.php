@@ -1,5 +1,27 @@
 <?php
 require_once 'dieuhuong.php';
+if (isset($_GET['msg'])) {
+    if ($_GET['msg'] == 'added') {
+        echo '<div class="alert alert-success alert-dismissible fade show">
+                Thêm vào giỏ hàng thành công!
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+              </div>';
+    }
+
+    if ($_GET['msg'] == 'updated') {
+        echo '<div class="alert alert-info alert-dismissible fade show">
+                Cập nhật giỏ hàng thành công!
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+              </div>';
+    }
+
+    if ($_GET['msg'] == 'deleted') {
+        echo '<div class="alert alert-danger alert-dismissible fade show">
+                Xóa sản phẩm khỏi giỏ hàng thành công!
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+              </div>';
+    }
+}
 
 $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
 if(!isset($_SESSION['login']['username'])){
@@ -20,7 +42,7 @@ $cart_empty = empty($cart);
 
 <body>
     <div class="container">
-        <h2>Giỏ Hàng</h2>
+        <h2 style="padding-top: 20px">Giỏ Hàng</h2>
         <table class="table table-bordered table-sm">
             <thead>
                 <tr>

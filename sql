@@ -245,7 +245,6 @@ ALTER TABLE `sanpham`
 --
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --

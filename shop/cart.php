@@ -41,18 +41,23 @@ if ($action == 'add') {
 	} else {
 		$_SESSION['cart'][$idsp] = $item;
 	}
+	header("location: view_cart.php?msg=added");
+    exit();
 }
 
 //cập nhật
 if ($action == 'update') {
 	$_SESSION['cart'][$idsp]['quantity'] = $quantity;
+	header("location: view_cart.php?msg=updated");
+    exit();
 }
 
 //xóa
 if ($action == 'delete') {
 	unset($_SESSION['cart'][$idsp]);
+	header("location: view_cart.php?msg=deleted");
+    exit();
 }
-	header("location: view_cart.php");
 
 	//thêm mới vào giỏ hàng
 
