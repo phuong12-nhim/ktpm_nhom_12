@@ -6,6 +6,7 @@ include_once 'connect.php';
 $error = [
     'username' => '',
     'password' => '',
+    'repassword' => '',
     'general' => ''
 ];
 
@@ -34,7 +35,7 @@ if (
     // 4️⃣ Nếu KHÔNG có lỗi → insert DB
     if (
         empty($errors['username']) &&
-        empty($errors['password'])
+        empty($errors['password']) 
     ) {
         $pas = md5($pas);
         $repass = md5($repass);
@@ -74,68 +75,68 @@ if (
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <!--  -->
     <style>
-    body {
-        background-image: linear-gradient(#f4d6cf, #8eccf5);
-        font-family: Arial, sans-serif;
-    }
+        body {
+            background-image: linear-gradient(#f4d6cf, #8eccf5);
+            font-family: Arial, sans-serif;
+        }
 
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-    .form-container {
-        max-width: 400px;
-        width: 100%;
-        padding: 20px;
-        background-color: white;
-        border-radius: 10px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    }
+        .form-container {
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
 
-    .form-group {
-        margin-bottom: 20px;
-    }
+        .form-group {
+            margin-bottom: 20px;
+        }
 
-    legend {
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 20px;
-        color: #333;
-    }
+        legend {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
 
-    .btn-primary {
-        background-color: #007bff;
-        border-color: #007bff;
-        width: 100%;
-        padding: 10px;
-    }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            width: 100%;
+            padding: 10px;
+        }
 
-    .btn-primary:hover {
-        background-color: #0056b3;
-        border-color: #0056b3;
-    }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
 
-    .login-link {
-        color: #007bff;
-        text-decoration: none;
-    }
+        .login-link {
+            color: #007bff;
+            text-decoration: none;
+        }
 
-    .login-link:hover {
-        color: #0056b3;
-        text-decoration: underline;
-    }
+        .login-link:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
 
-    .input-group-text {
-        background-color: transparent;
-        border: none;
-    }
+        .input-group-text {
+            background-color: transparent;
+            border: none;
+        }
 
-    .eye-icon {
-        cursor: pointer;
-    }
+        .eye-icon {
+            cursor: pointer;
+        }
     </style>
 
 </head>
@@ -152,7 +153,7 @@ if (
                         value="<?php echo $_POST['username'] ?? ''; ?>" required>
 
                     <?php if (!empty($errors['username'])) { ?>
-                    <small class="text-danger"><?php echo $errors['username']; ?></small>
+                        <small class="text-danger"><?php echo $errors['username']; ?></small>
                     <?php } ?>
                 </div>
 
@@ -162,10 +163,10 @@ if (
                         class="form-control <?php echo !empty($errors['password']) ? 'is-invalid' : ''; ?>" required>
 
                     <?php if (!empty($errors['password'])) { ?>
-                    <small class="text-danger"><?php echo $errors['password']; ?></small>
+                        <small class="text-danger"><?php echo $errors['password']; ?></small>
                     <?php } ?>
                 </div>
-
+            
                 <div class="form-group">
                     <label for="">Level</label>
                     <input type="number" name="level" class="form-control" required>

@@ -243,11 +243,6 @@ ALTER TABLE `sanpham`
   ADD KEY `FK_idauthor` (`id_author`);
 
 --
-
---
---
-
---
 -- AUTO_INCREMENT cho bảng `admin`
 --
 ALTER TABLE `admin`
@@ -287,8 +282,6 @@ ALTER TABLE `sanpham`
 ALTER TABLE `chitietdonhang`
   ADD CONSTRAINT `FK_ctdh` FOREIGN KEY (`idhoadon`) REFERENCES `hoadon` (`idhoadon`),
   ADD CONSTRAINT `FK_idsp` FOREIGN KEY (`idsanpham`) REFERENCES `sanpham` (`idsanpham`);
-
-
 --
 -- Các ràng buộc cho bảng `chitietsanpham`
 --
