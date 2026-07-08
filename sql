@@ -62,8 +62,7 @@ CREATE TABLE `chitietdonhang` (
 -- Đang đổ dữ liệu cho bảng `chitietdonhang`
 --
 
-INSERT INTO `chitietdonhang` (`idhoadon`, `idsanpham`, `dongia`, `soluong`) VALUES
-(1, 3, 42600000, 1);
+
 
 -- --------------------------------------------------------
 
@@ -114,8 +113,6 @@ CREATE TABLE `hoadon` (
 -- Đang đổ dữ liệu cho bảng `hoadon`
 --
 
-INSERT INTO `hoadon` (`idhoadon`, `idkhachhang`, `name`, `address`, `phone`, `email`, `Tong_tien`, `Ngay_tao`, `soluong`, `status`, `ngay_cap_nhat`) VALUES
-(1, 10, 'thanh', 'hà nội', 1234677, 'thanh@gmail.com', NULL, NULL, NULL, 2, NULL);
 
 -- --------------------------------------------------------
 
