@@ -5,16 +5,14 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
-# =============================
-# Cấu hình
-# =============================
-
-BASE_URL = "http://localhost:3000/shop/sanpham.php"      # Đổi thành website của bạn
+BASE_URL = "http://localhost:3000/shop/sanpham.php"     
 
 SEARCH_CASES = [
     "Harry Potter",
     "Python",
-    "sách giáo khoa"
+    "sách giáo khoa",
+    "SÁCH",
+    " sách "
 ]
 
 driver = webdriver.Chrome()
@@ -31,28 +29,22 @@ try:
         print("Đang test:", keyword)
         print("========================================")
 
-        # Tìm ô tìm kiếm
         search = wait.until(
             EC.presence_of_element_located((By.ID, "search"))
         )
 
-        # Xóa nội dung cũ
         search.clear()
 
-        # Nhập từ khóa
         search.send_keys(keyword)
 
-        # Enter
         search.send_keys(Keys.ENTER)
 
-        # Chờ trang load
         time.sleep(2)
 
-        # Lấy danh sách sản phẩm
         products = driver.find_elements(By.CLASS_NAME, "fe")
 
         if len(products) == 0:
-            print("❌ Không có sản phẩm nào.")
+            print("Không có sản phẩm nào.")
             driver.back()
             continue
 
@@ -75,11 +67,10 @@ try:
                     found = True
 
         if found:
-            print("✅ PASS")
+            print("PASS")
         else:
-            print("❌ FAIL")
+            print("FAIL")
 
-        # Quay về trang chủ để test tiếp
         driver.back()
 
         wait.until(
