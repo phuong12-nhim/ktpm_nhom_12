@@ -20,9 +20,9 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     }
 
     // Check if the password contains at least 4 numeric characters and no special characters
-    elseif (!preg_match('/^[0-9]{4,}$/', $pass) || preg_match('/[^A-Za-z0-9]/', $pass)) {
-        $error = "Mật khẩu phải chứa ít nhất 4 ký tự số và không chứa ký tự đặc biệt.";
-    } else {
+    // elseif (!preg_match('/^[0-9]{4,}$/', $pass) || preg_match('/[^A-Za-z0-9]/', $pass)) {
+    //     $error = "Mật khẩu phải chứa ít nhất 4 ký tự số và không chứa ký tự đặc biệt.";
+    // } else {
         $pass = md5($pass);
 
         $sql = "SELECT * FROM `admin` WHERE username = '$use' AND `password` = '$pass'";
@@ -35,7 +35,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         } else {
             $error = "Thông tin tài khoản hoặc mật khẩu không chính xác";
         }
-    }
+    
 }
 ?>
 
