@@ -18,35 +18,38 @@ $admin = mysqli_fetch_assoc($result);
 
 $admin_id = $admin['id'];
 
+$error = '';
+$success = '';
+
 if (isset($_POST['update'])) {
     $fullname = trim($_POST['fullname']);
     $email    = trim($_POST['email']);
-    $sdt    = trim($_POST['sdt']);
-    if ($fullname == '') {
+    $sdt      = trim($_POST['sdt']);
+
+    // Validate
+    if ($fullname === '') {
         $error = 'Họ tên không được để trống';
-    } elseif ($email && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    } elseif ($email !== '' && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = 'Email không hợp lệ';
     }
 
-    if (empty($error)) {
-        $update = "
-            UPDATE admin 
-            SET fullname='$fullname',
-                email='$email',
-                sdt='$sdt'
-            WHERE id=$admin_id
-        ";
+    // Chỉ update khi KHÔNG có lỗi
+    if ($error === '') {
+        $stmt = mysqli_prepare($conn, "UPDATE admin SET fullname=?, email=?, sdt=? WHERE id=?");
+        mysqli_stmt_bind_param($stmt, "sssi", $fullname, $email, $sdt, $admin_id);
 
-        if (mysqli_query($conn, $update)) {
+        if (mysqli_stmt_execute($stmt)) {
             $success = 'Cập nhật thành công';
-
-            // Load lại dữ liệu mới
-            $result = mysqli_query($conn, $sql);
-            $admin = mysqli_fetch_assoc($result);
         } else {
             $error = 'Cập nhật thất bại';
         }
+
+        mysqli_stmt_close($stmt);
     }
+
+    // Load lại dữ liệu từ DB sau khi submit
+    $result = mysqli_query($conn, $sql);
+    $admin = mysqli_fetch_assoc($result);
 }
 ?>
 
