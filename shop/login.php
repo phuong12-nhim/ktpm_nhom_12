@@ -13,7 +13,7 @@ if (isset($_POST['dangnhap'])) {
         'username' => $use
     ];
     // Check if the password contains at least 4 numeric characters and no special characters
-    if (preg_match('/^[0-9]{4,}$/', $pass) && !preg_match('/[^A-Za-z0-9]/', $pass)) {
+    if (preg_match('/^[0-9]{4,}$/', $pass) ) {
         $pass = md5($pass);
     // echo $use, $pass;
     $sql = "SELECT * FROM `khachang` WHERE username = '$use' AND matKhau = '$pass'";
