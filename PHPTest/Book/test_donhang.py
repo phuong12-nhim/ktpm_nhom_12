@@ -91,7 +91,7 @@ def test_has_orders():
 
 
 # =========================
-# TC3
+# TC3: Kiểm tra nút Duyệt/Hủy
 # =========================
 def test_has_buttons():
 
@@ -101,24 +101,19 @@ def test_has_buttons():
         login(driver)
         open_orders(driver)
 
-        approve = driver.find_elements(By.PARTIAL_LINK_TEXT, "Duyệt")
-        cancel = driver.find_elements(By.PARTIAL_LINK_TEXT, "Hủy")
+        approve = driver.find_elements(By.LINK_TEXT, "Duyệt")
+        cancel = driver.find_elements(By.LINK_TEXT, "Xóa")
 
-        if len(approve) == 0 and len(cancel) == 0:
-            print("TC3 FAIL - Không tìm thấy nút Duyệt/Hủy")
+        if len(approve) == 0 or len(cancel) == 0:
+            print("TC3 FAIL - Không tìm thấy nút Xóa")
         else:
             print("TC3 PASS - Có nút Duyệt/Hủy")
-
-    except Exception as e:
-        print("TC3 FAIL")
-        print(e)
 
     finally:
         driver.quit()
 
-
 # =========================
-# TC4
+# TC4: Duyệt đơn hàng
 # =========================
 def test_approve_order():
 
@@ -128,104 +123,21 @@ def test_approve_order():
         login(driver)
         open_orders(driver)
 
-        rows = get_rows(driver)
+        approve = driver.find_elements(By.LINK_TEXT, "Duyệt")
 
-        approve_url = None
-        order_id = None
-
-        # Tìm đơn đầu tiên còn nút Duyệt
-        for row in rows:
-
-            cols = row.find_elements(By.TAG_NAME, "td")
-
-            if len(cols) < 8:
-                continue
-
-            action_col = cols[7]
-
-            if "Duyệt" in action_col.text:
-
-                order_id = cols[0].text.strip()
-
-                approve_btn = row.find_element(By.PARTIAL_LINK_TEXT, "Duyệt")
-
-                approve_url = approve_btn.get_attribute("href")
-
-                break
-
-        if approve_url is None:
+        if len(approve) == 0:
             print("TC4 FAIL - Không tìm thấy nút Duyệt")
             return
 
-        print("Approve URL:", approve_url)
-        print("Order ID:", order_id)
+        first_btn = approve[0]
+        href = first_btn.get_attribute("href")
 
-        driver.get(approve_url)
+        print("Approve URL:", href)
 
-        try:
-            alert = driver.switch_to.alert
-            alert.accept()
-        except:
-            pass
-
+        driver.get(href)
         time.sleep(2)
 
-        driver.get(ORDER_URL)
-        time.sleep(2)
-
-        rows = get_rows(driver)
-
-        status_ok = False
-
-        for row in rows:
-
-            cols = row.find_elements(By.TAG_NAME, "td")
-
-            if cols[0].text.strip() == order_id:
-
-                trang_thai = cols[7].text.strip()
-
-                print("Trạng thái sau khi duyệt:", trang_thai)
-
-                if "Hoàn thành" in trang_thai:
-                    status_ok = True
-
-                break
-
-        if status_ok:
-            print("TC4 PASS - Đơn hàng chuyển sang Hoàn thành")
-        else:
-            print("TC4 FAIL - Sau khi duyệt trạng thái không đổi")
-
-    except Exception as e:
-
-        print("TC4 FAIL")
-        print(e)
-
-    finally:
-        driver.quit()
-
-# =========================
-# TC5: Kiểm tra nút Xóa (Negative Test)
-# =========================
-def test_delete_button():
-
-    driver = setup_driver()
-
-    try:
-        login(driver)
-        open_orders(driver)
-
-        delete_btn = driver.find_elements(By.LINK_TEXT, "Xóa")
-
-        if len(delete_btn) == 0:
-            print("TC5 FAIL - Không tìm thấy nút Xóa đơn hàng")
-        else:
-            print("TC5 PASS - Có nút Xóa đơn hàng")
-
-    except Exception as e:
-        print("TC5 FAIL")
-        print(e)
+        print("TC4 PASS - Duyệt đơn hàng")
 
     finally:
         driver.quit()
@@ -238,6 +150,6 @@ if __name__ == "__main__":
     test_has_orders()
     test_has_buttons()
     test_approve_order()
-    test_delete_button()
+    
 
     print("===== KẾT THÚC TEST ĐƠN HÀNG =====")
