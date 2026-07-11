@@ -1,7 +1,7 @@
 <?php
+ob_start();
 include_once 'ketnoi.php';
 session_start();
-ob_start();
 if (isset($_SESSION['register_success']) && $_SESSION['register_success']) {
     echo "<script>alert('Đăng ký thành công!');</script>";
     unset($_SESSION['register_success']); // Xóa thông báo sau khi hiển thị

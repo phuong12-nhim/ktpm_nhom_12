@@ -1,3 +1,12 @@
+<?php
+ob_start();
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+require_once 'ketnoi.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,7 +59,6 @@
 
             <div class="item-right">
                 <?php
-                require_once 'ketnoi.php';
                 $sql = "SELECT sanpham.*, tacgia.name AS tentacgia FROM sanpham LEFT JOIN tacgia ON sanpham.id_author = tacgia.id_author";
                 if (isset($_GET["prdid"])) {
                     $prdid = $_GET["prdid"];

@@ -1,12 +1,21 @@
 <?php
 include 'header.php';
 require_once 'connect.php';
-// lấy id trên tham số url đã gửi tù nút xóa
-$id = !empty($_GET['Proid']) ? (int)$_GET['Proid'] : 0;
+
+$id = (int)$_GET['Proid'];
+
+// Xóa chi tiết đơn hàng
+mysqli_query($conn, "DELETE FROM chitietdonhang WHERE idsanpham = $id");
+
+// Xóa chi tiết sản phẩm
+mysqli_query($conn, "DELETE FROM chitietsanpham WHERE idsanpham = $id");
+
+// Xóa sản phẩm
 $deleted = mysqli_query($conn, "DELETE FROM sanpham WHERE idsanpham = $id");
+
 if ($deleted) {
-    header('location: san_pham.php');
+    header("Location: san_pham.php");
 } else {
-    echo 'Có lỗi, vui lòng kiểm tra lại';
+    echo mysqli_error($conn);
 }
 ?>

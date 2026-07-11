@@ -1,0 +1,53 @@
+services:
+    web:
+        build: .
+        container_name: shop_php
+
+        ports:
+            - "8080:80"
+
+        volumes:
+            - .:/var/www/html
+
+        depends_on:
+            - mysql
+
+    mysql:
+        image: mysql:8.0
+        container_name: shop_mysql
+        restart: always
+
+        command:
+            [
+                "--character-set-server=utf8mb4",
+                "--collation-server=utf8mb4_unicode_ci",
+            ]
+
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: webbansach
+
+        ports:
+            - "3307:3306"
+
+        volumes:
+            - mysql_data:/var/lib/mysql
+            - ./database:/docker-entrypoint-initdb.d
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+
+        container_name: shop_phpmyadmin
+
+        depends_on:
+            - mysql
+
+        environment:
+            PMA_HOST: mysql
+            MYSQL_ROOT_PASSWORD: root
+
+        ports:
+            - "8081:80"
+
+volumes:
+    mysql_data:
