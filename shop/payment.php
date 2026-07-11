@@ -1,4 +1,5 @@
-    <?php
+<?php
+ob_start();
     require_once 'dieuhuong.php';
     require_once 'ketnoi.php';
     require_once 'cart_function.php';
@@ -35,14 +36,14 @@
         $email     = $res['email'];
         $tong_tien = 0;
         $soluong = 0;
-
+        $ngay_cap_nhat = date("Y-m-d H:i:s");
         foreach ($cart as $item) {
             $tong_tien += $item['price'] * $item['quantity'];
             $soluong   += $item['quantity'];
         }
         // Insert hóa đơn (1 lần duy nhất)
-        $stmt = $conn->prepare("INSERT INTO hoadon (idkhachhang, name, address, phone, email, Tong_tien, Ngay_tao, soluong) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("issssdsi", $idkhachhang, $username, $address, $phone, $email, $tong_tien, $Ngay_tao, $soluong);
+        $stmt = $conn->prepare("INSERT INTO hoadon (idkhachhang, name, address, phone, email, Tong_tien, Ngay_tao, soluong, ngay_cap_nhat) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("issssdsis", $idkhachhang, $username, $address, $phone, $email, $tong_tien, $Ngay_tao, $soluong, $ngay_cap_nhat);
         $stmt->execute();
         $mahd = $conn->insert_id;
 

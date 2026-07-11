@@ -38,7 +38,6 @@ if (
         empty($errors['password']) 
     ) {
         $pas = md5($pas);
-        $repass = md5($repass);
 
         $sql = "INSERT INTO admin(username, password, level)
                 VALUES ('$name', '$pas', '$lev')";

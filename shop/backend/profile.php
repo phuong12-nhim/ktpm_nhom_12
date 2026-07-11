@@ -59,17 +59,17 @@ if (isset($_POST['update'])) {
 <form method="POST">
     <div class="form-group">
         <label>Họ tên</label>
-        <input type="text" name="fullname" class="form-control" value="<?= htmlspecialchars($admin['fullname']) ?>">
+        <input type="text" name="fullname" class="form-control" value="<?= htmlspecialchars($admin['fullname'] ?? '') ?>">
     </div>
 
     <div class="form-group">
         <label>Email</label>
-        <input type="text" name="email" class="form-control" value="<?= htmlspecialchars($admin['email']) ?>">
+        <input type="text" name="email" class="form-control" value="<?= htmlspecialchars($admin['email']  ?? '') ?>">
     </div>
 
     <div class="form-group">
         <label>SĐT</label>
-        <input type="text" name="sdt" class="form-control" value="<?= htmlspecialchars($admin['sdt']) ?>">
+        <input type="text" name="sdt" class="form-control" value="<?= htmlspecialchars($admin['sdt']  ?? '') ?>">
     </div>
 
     <button type="submit" name="update" class="btn btn-primary">

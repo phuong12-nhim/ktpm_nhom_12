@@ -1,5 +1,4 @@
 <?php
-require_once 'dieuhuong.php';
 require_once 'ketnoi.php';
 require_once 'cart_function.php';
 
@@ -82,6 +81,8 @@ if (isset($_SESSION['login']['username']) && isset($_POST['update'])) {
         echo "<script>alert('Không tìm thấy khách hàng để cập nhật.');</script>";
     }
 }
+require_once 'dieuhuong.php';
+
 ?>
 
     <!DOCTYPE html>

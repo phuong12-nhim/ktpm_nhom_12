@@ -1,7 +1,6 @@
 <?php
-session_start();
-ob_start();
 require_once 'cart_function.php';
+
 $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
 ?>
 <!DOCTYPE html>

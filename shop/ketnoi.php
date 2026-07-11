@@ -1,11 +1,17 @@
 <?php
 // Replace 'your_password' with your actual password
-$conn = mysqli_connect('localhost', 'root', '', 'webbansach');
+$conn = mysqli_connect(
+    "mysql",
+    "root",
+    "root",
+    "webbansach"
+);
 
-// Check connection
 if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+    die("Kết nối thất bại: " . mysqli_connect_error());
 }
+
+mysqli_set_charset($conn, "utf8mb4");
 
 // Hàm định dạng tiền tệ
 function formatCurrency($curr)
