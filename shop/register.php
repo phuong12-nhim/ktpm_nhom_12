@@ -2,34 +2,40 @@
 session_start();
 ob_start();
 include_once 'ketnoi.php';
-if (isset($_POST['dangky']) &&
-    isset($_POST['name']) !='' &&
-    isset($_POST['phone']) !='' &&
-    isset($_POST['address']) !='' &&
-    isset($_POST['email']) !='' &&
-    isset($_POST['username']) !='' &&
-    isset($_POST['password']) !='') {
-    $name = $_POST['name'];
-    $sdt = $_POST['phone'];
-    $diachi = $_POST['address'];
-    $email = $_POST['email'];
-    $use = $_POST['username'];
-    $pas = $_POST['password'];
-    $pas = md5($pas);
 
-    $sql = "INSERT INTO `khachang`(`tenkhachhang`, `phone`, `address`, `email`, `username`, `matKhau`) VALUES 
-    ('$name','$sdt','$diachi','$email','$use','$pas')";
-    // echo $sql; exit;
+// BIẾN LỖI ĐỂ HIỂN THỊ
+$error_msg = "";
 
-    $dk_sql = mysqli_query($conn,$sql);
+if (isset($_POST['dangky'])) {
+    // Lấy dữ liệu từ form
+    $name = trim($_POST['name'] ?? '');
+    $sdt = trim($_POST['phone'] ?? '');
+    $diachi = trim($_POST['address'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $use = trim($_POST['username'] ?? '');
+    $pas = $_POST['password'] ?? '';
 
-    if ($dk_sql) {
-        $_SESSION['register_success'] = true; // đánh dấu đã đăng ký thành công
-        header("Location: login.php");        // chuyển hướng về trang đăng nhập
-        exit;
+    // LOGIC RÀNG BUỘC 
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strpos($email, '@gmail.com') === false) {
+        $error_msg = "Lỗi: Email phải có định dạng @gmail.com";
+    } elseif (strlen($pas) < 4 || strlen($pas) > 16) {
+        $error_msg = "Lỗi: Mật khẩu phải từ 4 đến 16 ký tự.";
     } else {
-    echo "đăng ký tài khoản thất bại";
-}
+        // Xử lý lưu vào DB
+        $pas_hashed = md5($pas);
+        $sql = "INSERT INTO `khachang`(`tenkhachhang`, `phone`, `address`, `email`, `username`, `matKhau`) 
+                VALUES ('$name','$sdt','$diachi','$email','$use','$pas_hashed')";
+
+        $dk_sql = mysqli_query($conn, $sql);
+
+        if ($dk_sql) {
+            $_SESSION['register_success'] = true;
+            header("Location: login.php");
+            exit;
+        } else {
+            $error_msg = "Đăng ký tài khoản thất bại.";
+        }
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -112,6 +118,9 @@ if (isset($_POST['dangky']) &&
         <div class="form-container">
             <form action="register.php" method="post">
                 <legend class="text-center">Đăng Ký</legend>
+                
+                <?php if (!empty($error_msg)) { echo '<div class="alert alert-danger">'.$error_msg.'</div>'; } ?>
+
                 <div class="form-group">
                     <input type="text" name="name" id="name" class="form-control" placeholder="Họ và tên" required>
                 </div>
@@ -134,9 +143,6 @@ if (isset($_POST['dangky']) &&
                             <i class="fas fa-eye"></i>
                         </span>
                     </div>
-                    <div class="alert alert-danger mt-2" id="password-error" style="display: none;">
-                        Mật khẩu phải chứa ít nhất 4 ký tự và không được chứa ký tự đặc biệt.
-                    </div>
                 </div>
                 <button type="submit" name="dangky" class="btn btn-primary">Đăng ký</button>
 
@@ -147,28 +153,11 @@ if (isset($_POST['dangky']) &&
         </div>
     </div>
 
-    <!-- JavaScript for password validation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var passwordInput = document.getElementById('password');
-            var passwordError = document.getElementById('password-error');
             var passwordToggleBtn = document.getElementById('show-password-toggle');
-
-            passwordInput.addEventListener('input', function () {
-                var passwordValue = passwordInput.value;
-
-                if (passwordValue.length < 4 || /[^A-Za-z0-9]/.test(passwordValue)) {
-                    passwordError.style.display = 'block';  
-                } else {
-                    var numericCount = (passwordValue.match(/\d/g) || []).length;
-                    if (numericCount < 4) {
-                        passwordError.style.display = 'block';
-                    } else {
-                        passwordError.style.display = 'none';
-                    }
-                }
-            });
 
             passwordToggleBtn.addEventListener('click', function () {
                 if (passwordInput.type === 'password') {
@@ -182,5 +171,4 @@ if (isset($_POST['dangky']) &&
         });
     </script>
 </body>
-
 </html>
