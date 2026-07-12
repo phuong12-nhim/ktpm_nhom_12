@@ -7,18 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 BASE_URL = "http://localhost/ktpm_nhom_12/shop"
 
 @pytest.fixture
-def driverfix():
-
-    driver = webdriver.Chrome()
-    driver.maximize_window()
-    driver.implicitly_wait(10)
-
-    yield driver
-
-    driver.quit()
-
-def driver(driverfix):
-
+def driver():
     driver = webdriver.Chrome()
     driver.maximize_window()
     driver.implicitly_wait(10)
@@ -38,4 +27,4 @@ def driver(driverfix):
     except:
         pass
 
-    return driverfix
+    return driver

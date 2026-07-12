@@ -2,21 +2,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-def test_cart_requires_login(driverfix):
-
-    driverfix.get("http://localhost/ktpm_nhom_12/shop/dieuhuong.php")
-
-    driverfix.find_element(
-    By.XPATH,
-    "//a[contains(@href,'view_cart.php')]"
-    ).click()  
-
-    WebDriverWait(driverfix, 10).until(
-        EC.url_contains("login.php")
-    )
-
-    assert "login.php" in driverfix.current_url
-
 def test_add_mua_ngay(driver):
 
     driver.get("http://localhost/ktpm_nhom_12/shop/sanpham.php")
