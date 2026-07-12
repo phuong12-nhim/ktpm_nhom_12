@@ -158,7 +158,7 @@ $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
                  
                 <div class="loc">
                     <!-- lọc -->
-                    <form action="/shop/sanpham.php" method="get">
+                    <form action="/sanpham.php" method="get">
                         <input type="text" name="txtPriceMin" id="txtPriceMin" placeholder="  Giá thấp nhất">
                         <input type="text" name="txtPriceMax" id="txtPriceMax" placeholder="  Giá cao nhất">
                         <input type="submit" style="width: 50px;" value="Lọc">

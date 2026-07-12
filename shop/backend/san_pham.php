@@ -94,7 +94,7 @@ $sanpham = mysqli_query($conn, $sql);
                         <td><?php echo $row['idsanpham']; ?></td>
                         <td><?php echo $brand_name; ?></td>
                         <td><?php echo $row['tensanpham']; ?></td>
-                        <td><?php echo "<img width=\"100px\" height = \"auto\" src=\"/shop/uploads/" . $row["image"] . "\" alt=\"" . $row["tensanpham"] . "\">" ?></td>
+                        <td><?php echo "<img width=\"100px\" height = \"auto\" src=\"/uploads/" . $row["image"] . "\" alt=\"" . $row["tensanpham"] . "\">" ?></td>
                         <td><?php echo $row['noidung']; ?></td>
                         <td><?php echo $row['giadauvao']; ?></td>
                         <td><?php echo $row['giadaura']; ?></td>
